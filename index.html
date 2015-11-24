@@ -247,7 +247,7 @@
         
           <span itemprop="articleBody">
             
-              <p>二级域名访问可以在域名dns解析时添加记录指向对应ip或url。<br>我觉得这样挺麻烦的就在解析主机记录用通配符*将所有的二级域名都解析到我的VPS。在服务端通过nginx来解析对应的域名。</p>
+              <p>二级域名访问可以在域名dns解析时添加记录指向对应ip或url。<br>我觉得这样挺麻烦的就在解析主机记录用通配符*将所有的二级域名都解析到我的VPS。在服务端通过nginx来解析对应的域名。<br>具体解析方法是<br><code>vi /etc/nginx/nginx.conf</code><br>``server{<br>  listen 80;<br>  server_name dayu.pw www.dayu.pw;<br>  index index.html index.htm;<br>  root /data/website;<br>}<br>```</p>
 
             
           </span>
