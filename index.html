@@ -131,7 +131,7 @@
             
               <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
-            首頁
+            Home
           </a>
         </li>
       
@@ -141,7 +141,7 @@
             
               <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
-            歸檔
+            Arquivos
           </a>
         </li>
       
@@ -151,7 +151,7 @@
             
               <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
-            標籤
+            Tags
           </a>
         </li>
       
@@ -177,15 +177,170 @@
 
     
     
+
+    
       
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/28/gulp初试/" itemprop="url">
+                  gulp初试
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Postado em
+            <time itemprop="dateCreated" datetime="2015-11-28T14:51:03+08:00" content="2015-11-28">
+              2015-11-28
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
       
-        
-        
-        
       
 
       
+        
+          <span itemprop="articleBody">
+            
+              <p>用了一段时间的grunt，没事找了gulp试了一下发现gulp的代码更简洁。准备把项目从grunt转到gulp。<br>之前的grunt实现的功能有less文件编译、js文件合并、livereload实时刷新、本地访问服务器。<br>这次希望添加的功能有：git自动上传、ftp自动上传<br>OK,let’s begin</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/24/mongodb安装/" itemprop="url">
+                  mongodb安装
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Postado em
+            <time itemprop="dateCreated" datetime="2015-11-24T22:27:35+08:00" content="2015-11-24">
+              2015-11-24
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="安装MongoDB">安装MongoDB</h2><h3 id="1配置软件包管理系统(YUM)">1配置软件包管理系统(YUM)</h3><p>创建文件 /etc/yum.repos.d/mongodb.repo<br>配置信息：<br>64位<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[mongodb]</span></span><br><span class="line"><span class="setting">name=<span class="value">MongoDB Repository</span></span></span><br><span class="line"><span class="setting">baseurl=<span class="value">http://downloads-distro.mongodb.org/repo/redhat/os/x<span class="number">86_64</span>/</span></span></span><br><span class="line"><span class="setting">gpgcheck=<span class="value"><span class="number">0</span></span></span></span><br><span class="line"><span class="setting">enabled=<span class="value"><span class="number">1</span></span></span></span><br></pre></td></tr></table></figure></p>
+<p>32位<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[mongodb]</span></span><br><span class="line"><span class="setting">name=<span class="value">MongoDB Repository</span></span></span><br><span class="line"><span class="setting">baseurl=<span class="value">http://downloads-distro.mongodb.org/repo/redhat/os/i686/</span></span></span><br><span class="line"><span class="setting">gpgcheck=<span class="value"><span class="number">0</span></span></span></span><br><span class="line"><span class="setting">enabled=<span class="value"><span class="number">1</span></span></span></span><br></pre></td></tr></table></figure></p>
+<h3 id="2安装_MongoDB_软件包和相关工具。">2安装 MongoDB 软件包和相关工具。</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum <span class="keyword">install</span> mongodb-org</span><br></pre></td></tr></table></figure>
+<h2 id="运行MongoDB">运行MongoDB</h2><h3 id="1启动MongDB">1启动MongDB</h3>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -219,7 +374,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            Postado em
             <time itemprop="dateCreated" datetime="2015-11-23T16:42:31+08:00" content="2015-11-23">
               2015-11-23
             </time>
@@ -306,7 +461,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            Postado em
             <time itemprop="dateCreated" datetime="2015-10-29T13:46:12+08:00" content="2015-10-29">
               2015-10-29
             </time>
@@ -406,22 +561,22 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
-              <span class="site-state-item-name">文章</span>
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">publicações</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">分類</span>
+              <span class="site-state-item-name">categorias</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">標籤</span>
+              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-name">tags</span>
               </a>
           </div>
 
@@ -464,11 +619,11 @@
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+  Desenvolvido com amor com <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
-  主題 -
+  Tema -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT
   </a>

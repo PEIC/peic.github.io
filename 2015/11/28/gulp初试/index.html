@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="gilp 前端自动化 懒," />
 
 
 
@@ -51,19 +51,16 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="description" content="用了一段时间的grunt，没事找了gulp试了一下发现gulp的代码更简洁。准备把项目从grunt转到gulp。之前的grunt实现的功能有less文件编译、js文件合并、livereload实时刷新、本地访问服务器。这次希望添加的功能有：git自动上传、ftp自动上传OK,let’s begin">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://dayu.pw/2015/10/29/hello-world/index.html">
+<meta property="og:title" content="gulp初试">
+<meta property="og:url" content="http://dayu.pw/2015/11/28/gulp初试/index.html">
 <meta property="og:site_name" content="大鱼">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2015-10-29T05:46:12.000Z">
+<meta property="og:description" content="用了一段时间的grunt，没事找了gulp试了一下发现gulp的代码更简洁。准备把项目从grunt转到gulp。之前的grunt实现的功能有less文件编译、js文件合并、livereload实时刷新、本地访问服务器。这次希望添加的功能有：git自动上传、ftp自动上传OK,let’s begin">
+<meta property="og:updated_time" content="2015-11-30T02:38:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="gulp初试">
+<meta name="twitter:description" content="用了一段时间的grunt，没事找了gulp试了一下发现gulp的代码更简洁。准备把项目从grunt转到gulp。之前的grunt实现的功能有less文件编译、js文件合并、livereload实时刷新、本地访问服务器。这次希望添加的功能有：git自动上传、ftp自动上传OK,let’s begin">
 
 
 
@@ -75,7 +72,7 @@ Quick">
   };
 </script>
 
-  <title> Hello World | 大鱼 </title>
+  <title> gulp初试 | 大鱼 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-cn">
@@ -195,7 +192,7 @@ Quick">
             
             
               
-                Hello World
+                gulp初试
               
             
           </h1>
@@ -204,8 +201,8 @@ Quick">
         <div class="post-meta">
           <span class="post-time">
             Postado em
-            <time itemprop="dateCreated" datetime="2015-10-29T13:46:12+08:00" content="2015-10-29">
-              2015-10-29
+            <time itemprop="dateCreated" datetime="2015-11-28T14:51:03+08:00" content="2015-11-28">
+              2015-11-28
             </time>
           </span>
 
@@ -228,33 +225,31 @@ Quick">
       
 
       
-        <span itemprop="articleBody"><p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <span itemprop="articleBody"><p>用了一段时间的grunt，没事找了gulp试了一下发现gulp的代码更简洁。准备把项目从grunt转到gulp。<br>之前的grunt实现的功能有less文件编译、js文件合并、livereload实时刷新、本地访问服务器。<br>这次希望添加的功能有：git自动上传、ftp自动上传<br>OK,let’s begin</p>
 </span>
       
     </div>
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/gilp-前端自动化-懒/" rel="tag">#gilp 前端自动化 懒</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2015/11/24/mongodb安装/" rel="next" title="mongodb安装">
+                <i class="fa fa-chevron-left"></i> mongodb安装
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/11/23/nginx配合泛域名解析实现任意二级域名访问/" rel="prev" title="nginx配合泛域名解析实现任意二级域名访问">
-                nginx配合泛域名解析实现任意二级域名访问 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -368,7 +363,7 @@ Quick">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick_Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create_a_new_post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run_server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate_static_files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy_to_remote_sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <p class="post-toc-empty">Esta publicação não possui uma tabela de conteúdo</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
