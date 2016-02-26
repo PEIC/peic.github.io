@@ -59,7 +59,7 @@
 <meta property="og:site_name" content="大鱼">
 <meta property="og:description" content="安装MongoDB1配置软件包管理系统(YUM)创建文件 /etc/yum.repos.d/mongodb.repo配置信息：64位12345[mongodb]name=MongoDB Repositorybaseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/gpgcheck=0enabled=1
 32位12345[mo">
-<meta property="og:updated_time" content="2015-11-25T05:22:16.000Z">
+<meta property="og:updated_time" content="2016-02-26T06:07:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mongodb安装">
 <meta name="twitter:description" content="安装MongoDB1配置软件包管理系统(YUM)创建文件 /etc/yum.repos.d/mongodb.repo配置信息：64位12345[mongodb]name=MongoDB Repositorybaseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/gpgcheck=0enabled=1
@@ -231,7 +231,8 @@
         <span itemprop="articleBody"><h2 id="安装MongoDB">安装MongoDB</h2><h3 id="1配置软件包管理系统(YUM)">1配置软件包管理系统(YUM)</h3><p>创建文件 /etc/yum.repos.d/mongodb.repo<br>配置信息：<br>64位<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[mongodb]</span></span><br><span class="line"><span class="setting">name=<span class="value">MongoDB Repository</span></span></span><br><span class="line"><span class="setting">baseurl=<span class="value">http://downloads-distro.mongodb.org/repo/redhat/os/x<span class="number">86_64</span>/</span></span></span><br><span class="line"><span class="setting">gpgcheck=<span class="value"><span class="number">0</span></span></span></span><br><span class="line"><span class="setting">enabled=<span class="value"><span class="number">1</span></span></span></span><br></pre></td></tr></table></figure></p>
 <p>32位<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[mongodb]</span></span><br><span class="line"><span class="setting">name=<span class="value">MongoDB Repository</span></span></span><br><span class="line"><span class="setting">baseurl=<span class="value">http://downloads-distro.mongodb.org/repo/redhat/os/i686/</span></span></span><br><span class="line"><span class="setting">gpgcheck=<span class="value"><span class="number">0</span></span></span></span><br><span class="line"><span class="setting">enabled=<span class="value"><span class="number">1</span></span></span></span><br></pre></td></tr></table></figure></p>
 <h3 id="2安装_MongoDB_软件包和相关工具。">2安装 MongoDB 软件包和相关工具。</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum <span class="keyword">install</span> mongodb-org</span><br></pre></td></tr></table></figure>
-<h2 id="运行MongoDB">运行MongoDB</h2><h3 id="1启动MongDB">1启动MongDB</h3></span>
+<h2 id="运行MongoDB">运行MongoDB</h2><h3 id="1启动MongDB">1启动MongDB</h3><p>掉坑了，卡在这里了。。。。解决了再更新😓</p>
+</span>
       
     </div>
 
@@ -250,8 +251,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/11/28/gulp初试/" rel="prev" title="gulp初试">
-                gulp初试 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/02/26/给github添加webhooks实现自动更新代码/" rel="prev" title="给github添加webhooks实现自动更新代码">
+                给github添加webhooks实现自动更新代码 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -320,7 +321,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -334,7 +335,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

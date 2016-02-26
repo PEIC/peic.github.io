@@ -177,6 +177,15 @@
 
     
     
+      
+      
+        
+        
+        
+      
+
+      
+    
 
     
       
@@ -200,8 +209,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/11/28/gulp初试/" itemprop="url">
-                  gulp初试
+                <a class="post-title-link" href="/2016/02/26/给github添加webhooks实现自动更新代码/" itemprop="url">
+                  给github添加webhooks实现自动更新代码
                 </a>
               
             
@@ -211,8 +220,8 @@
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2015-11-28T14:51:03+08:00" content="2015-11-28">
-              2015-11-28
+            <time itemprop="dateCreated" datetime="2016-02-26T14:51:03+08:00" content="2016-02-26">
+              2016-02-26
             </time>
           </span>
 
@@ -238,7 +247,16 @@
         
           <span itemprop="articleBody">
             
-              <p>用了一段时间的grunt，没事找了gulp试了一下发现gulp的代码更简洁。准备把项目从grunt转到gulp。<br>之前的grunt实现的功能有less文件编译、js文件合并、livereload实时刷新、本地访问服务器。<br>这次希望添加的功能有：git自动上传、ftp自动上传<br>OK,let’s begin<br>韩寒3</p>
+              <p>目标是实现当代码push到github上时，服务器自动执行git pull 来更新代码<br>首先在项目文件夹初始化git<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> init</span><br></pre></td></tr></table></figure></p>
+<p>设置git仓库地址(这里使用ssh方式，请确保你本地的ssh-key和github上的已设置对应好)<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github<span class="class">.com</span>:PEIC/peic<span class="class">.github</span><span class="class">.io</span><span class="class">.git</span></span><br></pre></td></tr></table></figure></p>
+<p>github的webhooks功能是当git仓库有变动的时候发出一个POST到指定地址，POST包含git的变动信息。<br>我们就是在服务端建立一个程序来响应这个POST，当变动类型为push时执行定义的shell脚本来更新代码。<br>作为前端我选择用nodejs来实现，nodejs已经有<a href="https://www.npmjs.com/package/github-webhook-handler" target="_blank" rel="external">github-webhook-handler</a>这个现成的模块来实现这个功能我们直接使用就行了。</p>
+<p>程序代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">var</span> createHandler = <span class="built_in">require</span>(<span class="string">'github-webhook-handler'</span>)</span><br><span class="line"><span class="comment">//这里的secret必须与github里填写的一致。</span></span><br><span class="line"><span class="keyword">var</span> handler = createHandler(&#123; path: <span class="string">'/'</span>, secret: <span class="string">'myhashsecret'</span> &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run_cmd</span>(<span class="params">cmd, args, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> spawn = <span class="built_in">require</span>(<span class="string">'child_process'</span>).spawn;</span><br><span class="line">  <span class="keyword">var</span> child = spawn(cmd, args);</span><br><span class="line">  <span class="keyword">var</span> resp = <span class="string">""</span>;</span><br><span class="line"> </span><br><span class="line">  child.stdout.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">buffer</span>) </span>&#123; resp += buffer.toString(); &#125;);</span><br><span class="line">  child.stdout.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; callback (resp) &#125;);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  handler(req, res, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    res.statusCode = <span class="number">404</span></span><br><span class="line">    res.end(<span class="string">'no such location'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;).listen(<span class="number">7777</span>)</span><br><span class="line"></span><br><span class="line">handler.on(<span class="string">'push'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Received a push event for %s to %s'</span>,</span><br><span class="line">    event.payload.repository.name,</span><br><span class="line">    event.payload.ref);</span><br><span class="line">    run_cmd(<span class="string">'sh'</span>, [<span class="string">'./deploy-dev.sh'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">text</span>)</span>&#123; <span class="built_in">console</span>.log(text) &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>被执行的更新脚本（COPY自:<a href="http://www.lovelucy.info/auto-deploy-website-by-webhooks-of-github-and-gitlab.html" target="_blank" rel="external">这里</a>）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line"> </span></span><br><span class="line">WEB_PATH=<span class="string">'/data/website'</span>//需要更新的项目路径</span><br><span class="line">WEB_USER=<span class="string">'root'</span> //用户名</span><br><span class="line"> </span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Start deployment"</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$WEB_PATH</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"pulling source code..."</span></span><br><span class="line">git reset --hard origin/master</span><br><span class="line">git clean <span class="operator">-f</span></span><br><span class="line">git pull origin master</span><br><span class="line">git checkout master</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"changing permissions..."</span></span><br><span class="line">chown -R <span class="variable">$WEB_USER</span>:<span class="variable">$WEB_PATH</span> root   //用户名 用户所在组</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Finished."</span></span><br></pre></td></tr></table></figure></p>
+<p>服务端已经设置好了，这时我们开始在github上配置。</p>
+<p>项目仓库-&gt;Setting-&gt;Webhooks&amp;services-&gt;add webhook<br><img src="http://i11.tietuku.com/656720e90bbd05f1.png" alt=""><br>Payload URL填写服务端项目运行的地址 可以直接填写ip加端口号也可以填写绑好的域名。这是=时需要注意如果地址为根路径的话需要在定义服务端代码的handler方法参数的path的值为’/‘，不是根路径的话填写对应的路径名。<br>Secret填写的为服务端handler方法参数里的secret。</p>
+<p>点击Add webhook就完成了。</p>
+<p>添加完成后webhook详情页面会有一个webhook执行POST的记录。<br><img src="http://i11.tietuku.com/db1d99a8fe7fba2c.png" alt=""><br>这里可以查看每次POST的时间和POST的内容。webhook添加成功后会自动执行一次POST操作。这时可以查看POST是否成功，失败会有一个感叹号icon在前面。可以展开查看服务端的Response来查找错误。<br><img src="http://i11.tietuku.com/173bb61f6282ebc1.png" alt=""><br>像这里的返回”no such location”就是因为handler方法path填写错误。</p>
+<p>参考文章：<a href="http://www.lovelucy.info/auto-deploy-website-by-webhooks-of-github-and-gitlab.html" target="_blank" rel="external">尘埃落定-&gt;使用 GitHub / GitLab 的 Webhooks 进行网站自动化部署</a></p>
 
             
           </span>
@@ -322,7 +340,8 @@
               <h2 id="安装MongoDB">安装MongoDB</h2><h3 id="1配置软件包管理系统(YUM)">1配置软件包管理系统(YUM)</h3><p>创建文件 /etc/yum.repos.d/mongodb.repo<br>配置信息：<br>64位<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[mongodb]</span></span><br><span class="line"><span class="setting">name=<span class="value">MongoDB Repository</span></span></span><br><span class="line"><span class="setting">baseurl=<span class="value">http://downloads-distro.mongodb.org/repo/redhat/os/x<span class="number">86_64</span>/</span></span></span><br><span class="line"><span class="setting">gpgcheck=<span class="value"><span class="number">0</span></span></span></span><br><span class="line"><span class="setting">enabled=<span class="value"><span class="number">1</span></span></span></span><br></pre></td></tr></table></figure></p>
 <p>32位<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[mongodb]</span></span><br><span class="line"><span class="setting">name=<span class="value">MongoDB Repository</span></span></span><br><span class="line"><span class="setting">baseurl=<span class="value">http://downloads-distro.mongodb.org/repo/redhat/os/i686/</span></span></span><br><span class="line"><span class="setting">gpgcheck=<span class="value"><span class="number">0</span></span></span></span><br><span class="line"><span class="setting">enabled=<span class="value"><span class="number">1</span></span></span></span><br></pre></td></tr></table></figure></p>
 <h3 id="2安装_MongoDB_软件包和相关工具。">2安装 MongoDB 软件包和相关工具。</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum <span class="keyword">install</span> mongodb-org</span><br></pre></td></tr></table></figure>
-<h2 id="运行MongoDB">运行MongoDB</h2><h3 id="1启动MongDB">1启动MongDB</h3>
+<h2 id="运行MongoDB">运行MongoDB</h2><h3 id="1启动MongDB">1启动MongDB</h3><p>掉坑了，卡在这里了。。。。解决了再更新😓</p>
+
             
           </span>
         
@@ -430,95 +449,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/29/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2015-10-29T13:46:12+08:00" content="2015-10-29">
-              2015-10-29
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -561,7 +491,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -575,7 +505,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>
